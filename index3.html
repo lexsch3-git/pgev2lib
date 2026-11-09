@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10243a">
+<title>PGEV2HOAI | Restoration & Governance Discussion</title>
+<style>
+:root{
+  --navy:#10243a;--navy2:#183b59;--teal:#168c88;--teal-soft:#e5f5f3;
+  --ink:#1e293b;--muted:#64748b;--line:#dbe4ec;--paper:#f4f7fa;
+  --white:#fff;--green:#16794b;--green-bg:#e8f6ee;--amber:#9a6100;--amber-bg:#fff4d9;
+  --blue:#245e9b;--blue-bg:#eaf2fc;--shadow:0 12px 32px rgba(16,36,58,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 "Segoe UI",Arial,sans-serif}
+a{color:#176b91;text-decoration:none}a:hover{text-decoration:underline}
+.mainlink{color:#176b91;font-weight:600;text-decoration:none}
+.mainlink:hover{text-decoration:underline}
+.hero{background:linear-gradient(125deg,var(--navy),var(--navy2));color:#fff;padding:42px 22px 34px}
+.wrap{max-width:1120px;margin:auto}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:700;color:#9bd7d2}
+h1{font-size:clamp(27px,4vw,40px);line-height:1.15;margin:10px 0}
+.hero p{max-width:760px;color:#d6e3ee;margin:12px 0 0}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.meta-pill{border:1px solid #ffffff38;background:#ffffff12;padding:7px 12px;border-radius:30px;font-size:12px}
+main{max-width:1120px;margin:26px auto 60px;padding:0 18px}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:-2px}
+.stat,.panel,.work-card{background:var(--white);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}
+.stat{padding:17px 18px}
+.stat strong{display:block;font-size:27px;color:var(--navy);line-height:1.2}
+.stat span{font-size:12px;color:var(--muted)}
+.section{margin-top:28px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:13px}
+h2{font-size:21px;color:var(--navy);margin:0}
+.sub{font-size:13px;color:var(--muted);margin:4px 0 0}
+.panel{padding:20px}
+.progress-top{display:flex;justify-content:space-between;gap:12px;font-size:13px;margin-bottom:9px}
+.progress{height:10px;border-radius:20px;background:#e8eef3;overflow:hidden}
+.progress>div{height:100%;width:20%;background:linear-gradient(90deg,var(--teal),#51b9a7);border-radius:20px;transition:width .25s}
+.timeline{display:grid;gap:11px}
+.step{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:start;padding:15px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.step-num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#edf3f7;color:var(--navy);font-weight:700;font-size:13px}
+.step h3{font-size:15px;margin:1px 0 3px;color:var(--navy)}
+.step p{font-size:13px;color:var(--muted);margin:0}
+.status{white-space:nowrap;border-radius:30px;padding:4px 10px;font-size:11px;font-weight:700}
+.done{color:var(--green);background:var(--green-bg)}
+.next{color:var(--blue);background:var(--blue-bg)}
+.pending{color:var(--amber);background:var(--amber-bg)}
+.todo{color:#596579;background:#edf1f5}
+.work-grid,.resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.work-card{padding:17px}
+.work-card h3{margin:0 0 5px;font-size:15px;color:var(--navy)}
+.work-card p{margin:0;color:var(--muted);font-size:13px}
+.card-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:13px}
+.resource{padding:15px;border:1px solid var(--line);border-radius:12px;background:#fff;min-width:0}
+.resource h3{font-size:14px;color:var(--navy);margin:0 0 8px}
+.resource a{display:inline-block;font-size:13px;margin:3px 0;overflow-wrap:anywhere}
+.resource small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.resource .file-icon{float:right;color:#8aa0b3;font-size:18px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input[type=search]{padding:10px 12px;border:1px solid var(--line);border-radius:9px;font:inherit;min-width:220px;background:#fff}
+button{border:1px solid var(--line);background:#fff;color:var(--navy);padding:9px 13px;border-radius:9px;font-weight:600;cursor:pointer}
+button:hover{background:#edf5f7}
+.note{background:var(--teal-soft);border-left:4px solid var(--teal);padding:13px 15px;border-radius:8px;font-size:13px;color:#245653}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:26px 12px 40px}
+@media(max-width:700px){.summary{grid-template-columns:1fr}.work-grid,.resource-grid{grid-template-columns:1fr}.step{grid-template-columns:30px 1fr}.step .status{grid-column:2;justify-self:start}.section-head{align-items:start;flex-direction:column}.hero{padding-top:32px}}
+@media print{body{background:#fff}.hero{padding:24px}.stat,.panel,.work-card{box-shadow:none}button,input{display:none!important}main{margin-top:15px}.resource-grid,.work-grid{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Parkwood Greens Executive Village · Phase 2</div>
+    <h1>Restoration & Governance<br>Discussion Points</h1>
+    <p>Working roadmap for DHSUD assistance, interim board formation, the election process, and the supporting records for PGEV2HOAI.</p>
+    <div class="hero-meta">
+      <span class="meta-pill">PGEV2HOAI</span>
+      <span class="meta-pill">DHSUD coordination</span>
+      <span class="meta-pill">Homeowners’ discussion reference</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="summary" aria-label="Progress summary">
+    <div class="stat"><strong id="completedCount">1</strong><span>Completed milestone</span></div>
+    <div class="stat"><strong id="nextCount">1</strong><span>Immediate next step</span></div>
+    <div class="stat"><strong>90%</strong><span>Homeowners’ master list and membership records</span></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div><h2>1. DHSUD-led restoration and election roadmap</h2><p class="sub">Sequence of actions and target timeframes for discussion and confirmation with DHSUD.</p></div>
+      <button onclick="window.print()">Print / Save PDF</button>
+    </div>
+    <div class="panel">
+      <div class="progress-top"><strong>Roadmap progress</strong><span id="progressLabel">1 of 5 milestones completed</span></div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div class="timeline" style="margin-top:18px">
+        <article class="step">
+          <div class="step-num">1</div><div><h3>Submit formal request for DHSUD assistance</h3><p>Formal request submitted. Supporting copy is available in the reference library below.</p></div><span class="status done">DONE</span>
+        </article>
+        <article class="step">
+          <div class="step-num">2</div><div><h3>DHSUD selection and verification of five people for the Interim Board</h3><p>Immediate next step: coordinate with DHSUD on the selection and verification process for the five proposed interim board members.</p></div><span class="status next">NEXT</span>
+        </article>
+        <article class="step">
+          <div class="step-num">3</div><div><h3>DHSUD issues the appointment order</h3><p>Formal appointment of the Interim Board by DHSUD.</p></div><span class="status pending">PENDING</span>
+        </article>
+        <article class="step">
+          <div class="step-num">4</div><div><h3>Interim Board constitutes the Election Committee within 30 days</h3><p>Within 30 days of appointment, the Interim Board is to constitute the Election Committee. If it cannot be constituted, DHSUD is to take the steps under Section 9 of Memorandum Circular No. 2035-003 and supervise the selection and appointment of the Election Committee so the election process can proceed.</p></div><span class="status pending">PENDING</span>
+        </article>
+        <article class="step">
+          <div class="step-num">5</div><div><h3>Election Committee conducts the election within 60 days</h3><p>The Election Committee conducts the election within 60 days from its constitution, subject to confirmation of the applicable DHSUD rules and timeline.</p></div><span class="status pending">PENDING</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><div><h2>2. Other workstreams</h2><p class="sub">Parallel activities supporting the restoration process.</p></div></div>
+    <div class="work-grid">
+      <article class="work-card"><h3>Review Articles of Incorporation and By-Laws</h3><p>Review the existing governing documents and identify amendments that may be necessary before the regular organization and election process.</p><div class="card-foot"><span class="status todo">TO DO</span></div></article>
+      <article class="work-card"><h3>Update homeowners’ master list and membership records</h3><p>Consolidate and validate homeowner information and membership records.</p><div class="card-foot"><span class="status next">90% DONE</span></div></article>
+      <article class="work-card"><h3>Organize homeowners’ general assembly</h3><p>Arrange a general assembly to explain the restoration process and provide homeowners an opportunity to raise questions.</p><div class="card-foot"><span class="status pending">DEPENDENCY: 2</span></div></article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><div><h2>3. DHSUD and restoration reference documents</h2><p class="sub">Key records and templates for the discussion.</p></div>
+      <div class="toolbar"><input id="search" type="search" placeholder="Search documents…" aria-label="Search documents"><button id="clearSearch">Clear</button></div>
+    </div>
+    <div class="resource-grid" id="resources">
+      <article class="resource" data-search="formal request dhsud interim assistance done"><span class="file-icon">PDF</span><h3>Formal request for DHSUD assistance</h3><a class="mainlink" href="pdfs/dhsudinterim.pdf" target="_blank" rel="noopener">Open submitted request ↗</a><small>Submitted · DONE</small></article>
+      <article class="resource" data-search="bylaws template dhsud 2024"><span class="file-icon">PDF</span><h3>DHSUD By-Laws template</h3><a class="mainlink" href="pdfs/Bylaws%20Regular%20v2024DHSUD.pdf" target="_blank" rel="noopener">Open template ↗</a><small>Reference for review and possible amendments</small></article>
+      <article class="resource" data-search="articles incorporation template dhsud"><span class="file-icon">PDF</span><h3>DHSUD Articles of Incorporation template</h3><a class="mainlink" href="pdfs/articles-incorporation.pdf" target="_blank" rel="noopener">Open template ↗</a><small>Reference for review and possible amendments</small></article>
+      <article class="resource" data-search="show cause order penalty phase 2 non compliance"><span class="file-icon">PDF</span><h3>Show Cause Order / Phase 2 penalty</h3><a class="mainlink" href="pdfs/DHSUD%20PGEV2%20PENALTY.pdf" target="_blank" rel="noopener">Open order ↗</a><small>Reference concerning Phase 2 non-compliance</small></article>
+      <article class="resource" data-search="certificate registration pgev2hoai hoa"><span class="file-icon">IMG</span><h3>DHSUD HOA Certificate of Registration</h3><a class="mainlink" href="pdfs/HOACertReg.png" target="_blank" rel="noopener">View certificate ↗</a><small>Registration record for PGEV2HOAI</small></article>
+      <article class="resource" data-search="phase 2 shared vision video"><span class="file-icon">MP4</span><h3>Phase 2 Shared Vision</h3><a class="mainlink" href="pdfs/Phase2_Vision.mp4" target="_blank" rel="noopener">Watch shared vision video ↗</a><small>Vision and direction for Phase 2</small></article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><div><h2>4. Historical PGEV2 records · 2006</h2><p class="sub">Original incorporation and registration documents for historical reference.</p></div></div>
+    <div class="resource-grid" id="historical">
+      <article class="resource" data-search="2006 article incorporation"><span class="file-icon">PDF</span><h3>2006 Articles of Incorporation</h3><a class="mainlink" href="pdfs/artinc.pdf" target="_blank" rel="noopener">Open document ↗</a></article>
+      <article class="resource" data-search="2006 bylaws"><span class="file-icon">PDF</span><h3>2006 By-Laws</h3><a class="mainlink" href="pdfs/pgev2-bylaw.pdf" target="_blank" rel="noopener">Open document ↗</a></article>
+      <article class="resource" data-search="2006 registration certificate"><span class="file-icon">PDF</span><h3>2006 Registration Certificate</h3><a class="mainlink" href="pdfs/pgev2regcert.pdf" target="_blank" rel="noopener">Open document ↗</a></article>
+      <article class="resource" data-search="undertaking list incorporators 2006"><span class="file-icon">PDF</span><h3>Undertaking and List of Incorporators</h3><a class="mainlink" href="pdfs/pgev2under.pdf" target="_blank" rel="noopener">Open document ↗</a></article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="note"><strong>Discussion note:</strong> This page is a working summary of the updates and reference materials provided. The statutory interpretation, applicable circular provisions, appointment process, and official deadlines should be confirmed directly with DHSUD before being treated as formal legal guidance.</div>
+  </section>
+</main>
+<footer> PGEV2HOAI · Restoration & Governance Discussion · Working document </footer>
+<script>
+const cards=[...document.querySelectorAll('#resources .resource, #historical .resource')];
+const search=document.getElementById('search');
+function filterCards(){
+  const q=search.value.trim().toLowerCase();
+  cards.forEach(card=>card.hidden=!((card.dataset.search||'')+' '+card.innerText).toLowerCase().includes(q));
+}
+search.addEventListener('input',filterCards);
+document.getElementById('clearSearch').addEventListener('click',()=>{search.value='';filterCards();search.focus()});
+const total=5,completed=1;
+document.getElementById('completedCount').textContent=completed;
+document.getElementById('nextCount').textContent=1;
+document.getElementById('progressLabel').textContent=`${completed} of ${total} milestones completed`;
+document.getElementById('progressBar').style.width=`${completed/total*100}%`;
+</script>
+</body>
+</html>
